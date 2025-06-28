@@ -97,18 +97,49 @@
         .wenye-title {
             text-align: center;
             margin: 5px 0;
-            padding: 10px;
+            padding: 20px;
             /* border-top: 2px solid #cc0000; */
             border-bottom: 2px solid #cc0000;
         }
 
-        .wenye-title h1 {
-            margin-bottom: 10px;
+        .wenye-profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
         }
 
-        .wenye-title p {
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #cc0000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .wenye-info {
+            text-align: left;
+        }
+
+        .wenye-info h1 {
+            margin-bottom: 10px;
+            color: #cc0000;
+        }
+
+        .wenye-info p {
             color: #990000;
             font-size: 18px;
+        }
+
+        @media (max-width: 600px) {
+            .wenye-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .wenye-info {
+                text-align: center;
+            }
         }
         
         .soviet-banner {
@@ -190,22 +221,27 @@
     
     <nav>
         <ul>
-            <li><a href="index.html#home">首页</a></li>
-            <li><a href="index.html#news">最新公告</a></li>
-            <li><a href="index.html#mission">我们的使命</a></li>
-            <li><a href="index.html#plan">五年计划</a></li>
-            <li><a href="index.html#join">加入我们</a></li>
+            <li><a href="/#home">首页</a></li>
+            <li><a href="/#news">最新公告</a></li>
+            <li><a href="/#mission">我们的使命</a></li>
+            <li><a href="/#plan">五年计划</a></li>
+            <li><a href="/#join">加入我们</a></li>
             <li><a href="wenye.html">文野书记</a></li>
         </ul>
     </nav>
     
     <div class="wenye-title">
-        <h1>文野同志</h1>
-        <p>CIC苏联分部委员会书记 | 图形学专家</p>
+        <div class="wenye-profile">
+            <img src="https://cdn.jsdmirror.cn/gh/wenye01/wenye01.github.io@main/img/profile.jpg" alt="文野同志" class="profile-image">
+            <div class="wenye-info">
+                <h1>文野 同志</h1>
+                <p>CIC苏联分部委员会书记 | 图形学专家</p>
+            </div>
+        </div>
     </div>
     
     <div class="soviet-banner">
-        "图形学是通向共产主义的窗口！" - 文野
+        "图形学是通向共产主义的窗口！" —— 文野
     </div>
     
     <h2>个人简介</h2>
@@ -226,12 +262,15 @@
     <h2>开源贡献</h2>
     <p>文野同志坚信，代码应该属于全人类。您可以在他的GitHub主页上找到他的开源贡献：</p>
     <a href="https://github.com/wenye01" class="github-link" target="_blank">访问文野同志的GitHub主页 →</a>
+
+    <h2>特别致谢</h2>
+    <p>本网站由文野同志指导&支持！</p>
     
     <div class="soviet-banner">
         代码属于无产阶级！
     </div>
     
-    <a href="index.html" class="back-link">← 返回主页</a>
+    <a href="/" class="back-link">← 返回主页</a>
     
     <footer>
         <p>华东理工大学计算机信息交流协会 苏联分部 © 1984</p>

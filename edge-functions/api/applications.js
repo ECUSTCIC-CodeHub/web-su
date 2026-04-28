@@ -69,7 +69,8 @@ export async function onRequestPost(context) {
       cs: '计算机科学系',
       ee: '电子工程系',
       math: '数学系',
-      physics: '物理系'
+      physics: '物理系',
+      social: '社会工作系'
     };
 
     const application = {

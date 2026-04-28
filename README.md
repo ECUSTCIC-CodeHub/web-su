@@ -35,9 +35,60 @@ web-su/
 
 ### 方式一：EdgeOne Pages（腾讯云）
 
-1. 在 EdgeOne Pages 控制台创建项目，关联本仓库
-2. 在 EdgeOne KV 中创建命名空间，将 `id` 填入 `edgeone.json`
-3. 构建配置：输出目录 `.`，无需构建命令
+#### 前置条件
+
+- 已注册腾讯云账号
+- 已开通 [EdgeOne Pages](https://console.cloud.tencent.com/edgeone/pages) 服务
+
+#### 步骤
+
+1. **创建 Pages 项目**
+   - 进入 [EdgeOne Pages 控制台](https://console.cloud.tencent.com/edgeone/pages) → 创建项目
+   - 关联本仓库（支持 GitHub / Gitee 等 Git 仓库）
+
+2. **创建 KV 命名空间**
+   - 进入 [EdgeOne KV 控制台](https://console.cloud.tencent.com/edgeone/kv) → 创建命名空间
+   - 记录命名空间 ID（格式：`ns-xxxxxxxx`）
+   - 将 ID 填入 `edgeone.json` 的 `kvNamespaces[0].id` 字段：
+     ```json
+     {
+       "name": "web-su",
+       "kvNamespaces": [
+         {
+           "binding": "degree_kv",
+           "id": "ns-xxxxxxxx"
+         }
+       ]
+     }
+     ```
+
+3. **配置构建**
+   - **构建命令**：留空（纯静态，无需构建）
+   - **输出目录**：`.`（项目根目录）
+
+4. **部署**
+   - 每次 `git push` 触发自动部署
+   - 也可在控制台手动触发部署
+
+#### 注意事项
+
+- `edgeone.json` 必须放在项目根目录，EdgeOne 会自动识别配置
+- KV 的 `binding` 名称（`degree_kv`）需与 Edge Functions 代码中的变量名一致
+- 如果 Functions 报 `degree_kv is not defined`，请检查 KV 绑定是否生效（可能需要重新部署）
+- Edge Functions 路由规则由文件目录结构决定，详见下方「路由映射」
+
+#### 路由映射
+
+| 文件路径 | 请求路径 | 支持方法 |
+| --- | --- | --- |
+| `edge-functions/api/applications.js` | `/api/applications` | GET, POST |
+| `edge-functions/api/applications/[id].js` | `/api/applications/:id` | GET, PUT, DELETE |
+| `edge-functions/api/certificates.js` | `/api/certificates` | GET, POST |
+| `edge-functions/api/certificates/[id].js` | `/api/certificates/:id` | GET, PUT, DELETE |
+| `edge-functions/api/stats.js` | `/api/stats` | GET |
+| `edge-functions/api/verify.js` | `/api/verify` | GET |
+
+> 方括号 `[id]` 表示动态路由参数，对应 `context.params.id`。
 
 ### 方式二：Cloudflare Pages
 

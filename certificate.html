@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毕业证书系统 - CIC苏联分部</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #e0e0e0;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: url('Hammer_and_sickle_red_on_transparent.svg');
+            background-repeat: no-repeat;
+            background-position: right top;
+            background-size: 150px;
+            background-attachment: fixed;
+        }
+        
+        header {
+            text-align: center;
+            border-bottom: 3px solid #cc0000;
+        }
+        
+        h1 {
+            color: #cc0000;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            color: #990000;
+            border-left: 5px solid #cc0000;
+            padding-left: 10px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        nav {
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #cc0000;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: #cc0000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+            color: #990000;
+        }
+        
+        .soviet-banner {
+            background-color: #cc0000;
+            color: gold;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .propaganda {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        /* 证书样式 */
+        .certificate-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .certificate {
+            width: 100%;
+            max-width: 700px;
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 50%, #fff9e6 100%);
+            border: 8px double #cc0000;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #cc0000;
+            pointer-events: none;
+        }
+        
+        .certificate-header {
+            text-align: center;
+            border-bottom: 3px solid #cc0000;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .certificate-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        
+        .certificate-title {
+            font-size: 32px;
+            color: #cc0000;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .certificate-subtitle {
+            font-size: 18px;
+            color: #990000;
+        }
+        
+        .certificate-body {
+            text-align: center;
+            line-height: 2;
+        }
+        
+        .certificate-body p {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        
+        .student-name {
+            font-size: 28px;
+            color: #cc0000;
+            font-weight: bold;
+            border-bottom: 2px solid #cc0000;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        
+        .degree-name {
+            font-size: 24px;
+            color: #990000;
+            font-weight: bold;
+        }
+        
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #cc0000;
+        }
+        
+        .certificate-seal {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #cc0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #cc0000;
+            font-weight: bold;
+            text-align: center;
+            transform: rotate(-15deg);
+            opacity: 0.8;
+        }
+        
+        .certificate-signature {
+            text-align: right;
+        }
+        
+        .signature-line {
+            border-bottom: 1px solid #333;
+            width: 150px;
+            margin-bottom: 5px;
+        }
+        
+        .certificate-number {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 验证区域 */
+        .verify-section {
+            background-color: #f5f5f5;
+            border: 2px solid #cc0000;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .verify-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .verify-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #999;
+            font-family: 'Times New Roman', serif;
+            font-size: 16px;
+        }
+        
+        .verify-btn {
+            background-color: #cc0000;
+            color: gold;
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .verify-btn:hover {
+            background-color: #990000;
+        }
+        
+        .verify-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .verify-result.valid {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .verify-result.invalid {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        /* 打印样式 */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            
+            nav, .soviet-banner, .propaganda, .verify-section, footer, .no-print, .cert-list {
+                display: none !important;
+            }
+            
+            .certificate {
+                border: 8px double #000;
+                box-shadow: none;
+            }
+            
+            .certificate::before {
+                border-color: #000;
+            }
+        }
+        
+        .print-btn {
+            background-color: #cc0000;
+            color: gold;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .print-btn:hover {
+            background-color: #990000;
+            transform: scale(1.05);
+        }
+        
+        .button-group {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* 证书列表 */
+        .cert-list {
+            margin: 20px 0;
+        }
+        
+        .cert-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f5f5f5;
+        }
+        
+        .cert-table th {
+            background-color: #cc0000;
+            color: gold;
+            padding: 12px 10px;
+            text-align: left;
+        }
+        
+        .cert-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .cert-table tr:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .cert-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .cert-status.valid {
+            background-color: #00cc00;
+            color: #fff;
+        }
+        
+        .cert-status.revoked {
+            background-color: #cc0000;
+            color: #fff;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 10px;
+            border-top: 3px solid #cc0000;
+            font-size: 12px;
+        }
+        
+        .cyrillic {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+        
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .certificate {
+                padding: 20px;
+            }
+            
+            .certificate-title {
+                font-size: 24px;
+            }
+            
+            .certificate-footer {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .certificate-signature {
+                text-align: center;
+            }
+            
+            .cert-table {
+                font-size: 14px;
+            }
+            
+            .cert-table th, .cert-table td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="home">
+        <img src="logo.png" alt="CIC标志" class="logo">
+        <h1>Ассоциация компьютерной информации Восточно-Китайского университета науки и технологии — Советский сектор</h1>
+        <p>华东理工大学计算机信息交流协会 - 苏联分部</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="/#home">首页</a></li>
+            <li><a href="/#news">最新公告</a></li>
+            <li><a href="/#mission">我们的使命</a></li>
+            <li><a href="/#plan">五年计划</a></li>
+            <li><a href="/#join">加入我们</a></li>
+            <li><a href="wenye.html">文野书记</a></li>
+            <li><a href="degree.html">学位颁发</a></li>
+            <li><a href="certificate.html">毕业证书</a></li>
+        </ul>
+    </nav>
+    
+    <div class="soviet-banner">
+        "毕业证书是工人阶级知识分子的光荣证明！" —— CIC苏联分部
+    </div>
+    
+    <h2>毕业证书</h2>
+    
+    <div class="certificate-container" id="certificateContainer">
+        <div class="loading">加载证书中...</div>
+    </div>
+    
+    <div class="button-group no-print" id="buttonGroup" style="display: none;">
+        <button class="print-btn" onclick="window.print()">🖨️ 打印证书</button>
+        <button class="print-btn" onclick="downloadPDF()">📄 下载PDF</button>
+    </div>
+    
+    <h2>证书验证</h2>
+    <div class="verify-section">
+        <p>请输入证书编号或验证码进行验证：</p>
+        <div class="verify-form">
+            <input type="text" id="verifyCode" placeholder="输入证书编号或验证码">
+            <button class="verify-btn" onclick="verifyCertificate()">验证证书</button>
+        </div>
+        <div id="verifyResult" class="verify-result"></div>
+    </div>
+    
+    <h2>证书列表</h2>
+    <div class="propaganda">
+        以下是CIC苏联分部学位委员会颁发的所有学位证书：
+    </div>
+    
+    <div class="cert-list" id="certList">
+        <div class="loading">加载证书列表...</div>
+    </div>
+    
+    <div class="propaganda">
+        "在苏联，每一张毕业证书都是对知识的尊重，对劳动的赞美！"<br>
+        — CIC苏联分部学位委员会
+    </div>
+    
+    <footer>
+        <p>华东理工大学计算机信息交流协会 苏联分部 © 1984</p>
+        <p>毕业证书系统版本: <span class="cyrillic">v2.0</span> | 数据存储: EdgeOne KV</p>
+        <p>本网站纯属搞笑，请勿当真！</p>
+        <p>官方网站: <a href="//www.ecustcic.com/">www.ecustcic.com</a></p>
+    </footer>
+    
+    <script>
+        const API_BASE = '/api';
+        let currentCertificate = null;
+        
+        // 从 URL 参数获取证书ID
+        function getUrlParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+        
+        // 加载单个证书
+        async function loadCertificate(id) {
+            const container = document.getElementById('certificateContainer');
+            container.innerHTML = '<div class="loading">加载证书中...</div>';
+            
+            try {
+                const res = await fetch(`${API_BASE}/certificates/${id}`);
+                const json = await res.json();
+                
+                if (!json.success) {
+                    container.innerHTML = '<div class="empty-state">证书不存在</div>';
+                    return;
+                }
+                
+                currentCertificate = json.data;
+                renderCertificate(currentCertificate);
+                document.getElementById('buttonGroup').style.display = 'block';
+            } catch (e) {
+                container.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
+                console.error('加载证书失败:', e);
+            }
+        }
+        
+        // 渲染证书
+        renderCertificate = (cert) => {
+            const container = document.getElementById('certificateContainer');
+            container.innerHTML = `
+                <div class="certificate">
+                    <div class="certificate-header">
+                        <img src="logo.png" alt="CIC标志" class="certificate-logo">
+                        <div class="certificate-title">ДИПЛОМ 毕业证书</div>
+                        <div class="certificate-subtitle">CIC苏联分部学位委员会颁发</div>
+                    </div>
+                    
+                    <div class="certificate-body">
+                        <p>兹证明</p>
+                        <p class="student-name">${cert.studentName} ${cert.studentNameRu !== cert.studentName ? 'Товарищ ' + cert.studentNameRu : ''}</p>
+                        <p>学号: ${cert.studentId}</p>
+                        <p>在 <strong>${cert.department}</strong> 完成</p>
+                        <p class="degree-name">${cert.degreeType} ${cert.degreeTypeRu} 学位</p>
+                        <p>研究方向: ${cert.research}</p>
+                        <p>论文题目: 《${cert.thesis}》</p>
+                        <p>成绩优异，准予毕业</p>
+                    </div>
+                    
+                    <div class="certificate-footer">
+                        <div class="certificate-seal">
+                            CIC<br>苏联分部<br>学位委员会
+                        </div>
+                        <div class="certificate-signature">
+                            <div class="signature-line"></div>
+                            <p>学位委员会主席</p>
+                            <p>文野 同志</p>
+                            <p>${cert.issueDate}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certificate-number">
+                        证书编号: ${cert.id} | 验证码: ${cert.verifyCode}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 加载证书列表
+        async function loadCertList() {
+            const listEl = document.getElementById('certList');
+            listEl.innerHTML = '<div class="loading">加载证书列表...</div>';
+            
+            try {
+                const res = await fetch(`${API_BASE}/certificates`);
+                const json = await res.json();
+                
+                if (!json.success || json.data.length === 0) {
+                    listEl.innerHTML = '<div class="empty-state">暂无证书记录</div>';
+                    return;
+                }
+                
+                listEl.innerHTML = `
+                    <table class="cert-table">
+                        <thead>
+                            <tr>
+                                <th>证书编号</th>
+                                <th>姓名</th>
+                                <th>学位</th>
+                                <th>部门</th>
+                                <th>颁发日期</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${json.data.map(cert => `
+                                <tr>
+                                    <td>${cert.id}</td>
+                                    <td>${cert.studentName}</td>
+                                    <td>${cert.degreeType}</td>
+                                    <td>${cert.department}</td>
+                                    <td>${cert.issueDate}</td>
+                                    <td><span class="cert-status ${cert.status}">${cert.status === 'valid' ? '有效' : '已撤销'}</span></td>
+                                    <td><a href="?id=${cert.id}" style="color: #cc0000;">查看</a></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } catch (e) {
+                listEl.innerHTML = '<div class="empty-state">加载失败，请刷新重试</div>';
+                console.error('加载证书列表失败:', e);
+            }
+        }
+        
+        // 验证证书
+        async function verifyCertificate() {
+            const code = document.getElementById('verifyCode').value.trim();
+            const resultEl = document.getElementById('verifyResult');
+            
+            if (!code) {
+                resultEl.className = 'verify-result invalid';
+                resultEl.innerHTML = '请输入证书编号或验证码';
+                return;
+            }
+            
+            try {
+                // 先尝试作为证书ID查找
+                let res = await fetch(`${API_BASE}/verify?id=${encodeURIComponent(code)}`);
+                let json = await res.json();
+                
+                // 如果没找到，尝试作为验证码查找
+                if (!json.valid) {
+                    res = await fetch(`${API_BASE}/verify?code=${encodeURIComponent(code)}`);
+                    json = await res.json();
+                }
+                
+                if (json.valid) {
+                    const data = json.data;
+                    resultEl.className = 'verify-result valid';
+                    resultEl.innerHTML = `
+                        <strong>✓ ${json.message}</strong><br><br>
+                        <strong>证书编号:</strong> ${data.id}<br>
+                        <strong>姓名:</strong> ${data.studentName}<br>
+                        <strong>学号:</strong> ${data.studentId}<br>
+                        <strong>部门:</strong> ${data.department}<br>
+                        <strong>学位:</strong> ${data.degreeType}<br>
+                        <strong>研究方向:</strong> ${data.research}<br>
+                        <strong>论文题目:</strong> ${data.thesis}<br>
+                        <strong>导师:</strong> ${data.supervisor}<br>
+                        <strong>颁发日期:</strong> ${data.issueDate}<br><br>
+                        <a href="?id=${data.id}" style="color: #cc0000; font-weight: bold;">查看完整证书 →</a>
+                    `;
+                } else {
+                    resultEl.className = 'verify-result invalid';
+                    resultEl.innerHTML = `<strong>✗ ${json.message}</strong>`;
+                }
+            } catch (e) {
+                resultEl.className = 'verify-result invalid';
+                resultEl.innerHTML = '验证失败，请检查网络连接';
+                console.error('验证失败:', e);
+            }
+        }
+        
+        // 下载PDF（模拟）
+        function downloadPDF() {
+            alert('PDF下载功能正在开发中...\n\n建议使用打印功能（Ctrl+P）另存为PDF。');
+        }
+        
+        // 回车键验证
+        document.getElementById('verifyCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyCertificate();
+        });
+        
+        // 初始化
+        const certId = getUrlParam('id');
+        if (certId) {
+            loadCertificate(certId);
+        } else {
+            // 显示默认证书或提示
+            document.getElementById('certificateContainer').innerHTML = `
+                <div class="empty-state">
+                    <p>请从证书列表中选择一张证书查看</p>
+                    <p>或在学位申请页面批准申请后自动生成证书</p>
+                </div>
+            `;
+        }
+        loadCertList();
+    </script>
+</body>
+</html>

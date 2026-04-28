@@ -1,0 +1,10 @@
+{
+  "name": "cic-soviet-degree-system",
+  "description": "CIC苏联分部学位颁发与毕业证书系统",
+  "kvNamespaces": [
+    {
+      "binding": "degree_kv",
+      "id": "ns-JxOyjVpaGCq1"
+    }
+  ]
+}

@@ -1,10 +1,13 @@
+# Cloudflare Pages 项目配置
+# 注意：Pages 项目通过 Dashboard 或 `wrangler pages deploy` 部署
+# 不要用 `wrangler deploy`（那是部署 Worker 的命令）
+
 name = "web-su"
 compatibility_date = "2025-04-28"
-pages_build_output_dir = "."
 
-# KV 命名空间绑定 - 需先在 Cloudflare Dashboard 创建 KV namespace
-# 然后运行: wrangler kv:namespace create "web-su"
-# 把输出的 id 填入下面
+# Pages 项目不需要 main 入口，Functions 目录自动识别
+# KV 绑定在 Cloudflare Dashboard 中配置后即可在生产环境使用
+# 本地开发时的 KV 绑定：
 [[kv_namespaces]]
-binding = "web-su"
-id = "5e73a881440d4ec6bbee18108bf1fdd2"
+binding = "DEGREE_KV"
+id = "2a1c2ced9f0940a2ae3d2d57b20f72b1"

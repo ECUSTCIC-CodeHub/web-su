@@ -41,23 +41,37 @@ web-su/
 
 ### 方式二：Cloudflare Pages
 
-1. 创建 KV 命名空间：
-   ```bash
-   npx wrangler kv:namespace create "DEGREE_KV"
-   ```
+> ⚠️ 注意：Cloudflare Pages ≠ Cloudflare Workers，部署命令是 `wrangler pages deploy` 而非 `wrangler deploy`。
 
-2. 将输出的 `id` 填入 `wrangler.toml`：
-   ```toml
-   [[kv_namespaces]]
-   binding = "DEGREE_KV"
-   id = "你的-kv-namespace-id"
-   ```
+#### 推荐：Dashboard 部署（最简单）
 
-3. 部署：
+1. 在 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → 创建 Pages 项目 → 连接 Git 仓库
+
+2. 构建设置：
+   - **构建命令**：留空（无需构建）
+   - **输出目录**：`.`
+
+3. 创建 KV 命名空间并绑定：
    ```bash
-   npx wrangler pages deploy .
+   npx wrangler kv namespace create DEGREE_KV
    ```
-   或在 Cloudflare Dashboard 中连接 GitHub 仓库自动部署。
+   然后在 Dashboard → Pages 项目 → Settings → Functions → KV namespace bindings 中添加：
+   - 变量名：`DEGREE_KV`
+   - 选择刚创建的 namespace
+
+4. 每次 `git push` 自动部署。
+
+#### CLI 部署（可选）
+
+```bash
+# 1. 创建 KV 命名空间
+npx wrangler kv namespace create DEGREE_KV
+
+# 2. 在 Dashboard 绑定 KV（见上一步）
+
+# 3. 部署（注意是 pages deploy，不是 deploy）
+npx wrangler pages deploy .
+```
 
 ## API 接口
 

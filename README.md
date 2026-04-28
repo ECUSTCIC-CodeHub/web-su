@@ -28,7 +28,7 @@ web-su/
 │   └── api/                # （目录结构同上）
 │
 ├── edgeone.json            # EdgeOne 配置文件
-└── wrangler.toml           # Cloudflare Pages 配置文件
+└── README.md
 ```
 
 ## 部署方式
@@ -41,37 +41,22 @@ web-su/
 
 ### 方式二：Cloudflare Pages
 
-> ⚠️ 注意：Cloudflare Pages ≠ Cloudflare Workers，部署命令是 `wrangler pages deploy` 而非 `wrangler deploy`。
+> ⚠️ 注意：Pages 项目通过 Git 部署时 **不需要 `wrangler.toml`**，配置文件会导致 CI 误判为 Worker 项目。KV 绑定在 Dashboard 中配置即可。
 
-#### 推荐：Dashboard 部署（最简单）
+#### 步骤
 
-1. 在 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → 创建 Pages 项目 → 连接 Git 仓库
+1. 在 [Cloudflare Dashboard](https://dash.cloudflare.com/) → Workers & Pages → **创建** → **Pages** → 连接 Git 仓库
 
 2. 构建设置：
    - **构建命令**：留空（无需构建）
    - **输出目录**：`.`
 
-3. 创建 KV 命名空间并绑定：
-   ```bash
-   npx wrangler kv namespace create DEGREE_KV
-   ```
-   然后在 Dashboard → Pages 项目 → Settings → Functions → KV namespace bindings 中添加：
+3. 绑定 KV（**必须做**，否则 Functions 无法读写数据）：
+   - 进入项目 → Settings → Functions → KV namespace bindings
    - 变量名：`DEGREE_KV`
-   - 选择刚创建的 namespace
+   - 选择已创建的 namespace（id: `2a1c2ced9f0940a2ae3d2d57b20f72b1`）
 
 4. 每次 `git push` 自动部署。
-
-#### CLI 部署（可选）
-
-```bash
-# 1. 创建 KV 命名空间
-npx wrangler kv namespace create DEGREE_KV
-
-# 2. 在 Dashboard 绑定 KV（见上一步）
-
-# 3. 部署（注意是 pages deploy，不是 deploy）
-npx wrangler pages deploy .
-```
 
 ## API 接口
 

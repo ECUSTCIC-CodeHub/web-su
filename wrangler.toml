@@ -3,8 +3,8 @@ compatibility_date = "2025-04-28"
 pages_build_output_dir = "."
 
 # KV 命名空间绑定 - 需先在 Cloudflare Dashboard 创建 KV namespace
-# 然后运行: wrangler kv:namespace create "DEGREE_KV"
+# 然后运行: wrangler kv:namespace create "web-su"
 # 把输出的 id 填入下面
 [[kv_namespaces]]
-binding = "DEGREE_KV"
-id = "your-kv-namespace-id-here"
+binding = "web-su"
+id = "5e73a881440d4ec6bbee18108bf1fdd2"

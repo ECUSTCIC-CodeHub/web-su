@@ -70,7 +70,28 @@ export async function onRequestPost(context) {
       ee: '电子工程系',
       math: '数学系',
       physics: '物理系',
-      social: '社会工作系'
+      chemistry: '化学系',
+      biology: '生物系',
+      chinese: '中文系',
+      foreign: '外语系',
+      history: '历史系',
+      philosophy: '哲学系',
+      economics: '经济学系',
+      management: '管理系',
+      law: '法学系',
+      social: '社会工作系',
+      art: '艺术系',
+      music: '音乐系',
+      pe: '体育系',
+      medicine: '医学系',
+      architecture: '建筑系',
+      environment: '环境科学系',
+      materials: '材料科学系',
+      journalism: '新闻系',
+      education: '教育系',
+      psychology: '心理学系',
+      geography: '地理系',
+      astronomy: '天文系'
     };
 
     const application = {

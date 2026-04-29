@@ -582,11 +582,42 @@
                 <label>所属部门</label>
                 <select name="department" required>
                     <option value="">请选择部门</option>
-                    <option value="cs">计算机科学系</option>
-                    <option value="ee">电子工程系</option>
-                    <option value="math">数学系</option>
-                    <option value="physics">物理系</option>
-                    <option value="social">社会工作系</option>
+                    <optgroup label="理工科">
+                        <option value="cs">计算机科学系</option>
+                        <option value="ee">电子工程系</option>
+                        <option value="math">数学系</option>
+                        <option value="physics">物理系</option>
+                        <option value="chemistry">化学系</option>
+                        <option value="biology">生物系</option>
+                        <option value="materials">材料科学系</option>
+                        <option value="environment">环境科学系</option>
+                        <option value="astronomy">天文系</option>
+                    </optgroup>
+                    <optgroup label="人文与社会科学">
+                        <option value="chinese">中文系</option>
+                        <option value="foreign">外语系</option>
+                        <option value="history">历史系</option>
+                        <option value="philosophy">哲学系</option>
+                        <option value="journalism">新闻系</option>
+                        <option value="social">社会工作系</option>
+                        <option value="psychology">心理学系</option>
+                        <option value="education">教育系</option>
+                    </optgroup>
+                    <optgroup label="经济与管理">
+                        <option value="economics">经济学系</option>
+                        <option value="management">管理系</option>
+                        <option value="law">法学系</option>
+                    </optgroup>
+                    <optgroup label="艺术与体育">
+                        <option value="art">艺术系</option>
+                        <option value="music">音乐系</option>
+                        <option value="pe">体育系</option>
+                    </optgroup>
+                    <optgroup label="其他">
+                        <option value="medicine">医学系</option>
+                        <option value="architecture">建筑系</option>
+                        <option value="geography">地理系</option>
+                    </optgroup>
                 </select>
             </div>
             
@@ -676,7 +707,28 @@
             ee: '电子工程系',
             math: '数学系',
             physics: '物理系',
-            social: '社会工作系'
+            chemistry: '化学系',
+            biology: '生物系',
+            chinese: '中文系',
+            foreign: '外语系',
+            history: '历史系',
+            philosophy: '哲学系',
+            economics: '经济学系',
+            management: '管理系',
+            law: '法学系',
+            social: '社会工作系',
+            art: '艺术系',
+            music: '音乐系',
+            pe: '体育系',
+            medicine: '医学系',
+            architecture: '建筑系',
+            environment: '环境科学系',
+            materials: '材料科学系',
+            journalism: '新闻系',
+            education: '教育系',
+            psychology: '心理学系',
+            geography: '地理系',
+            astronomy: '天文系'
         };
         
         // 显示消息

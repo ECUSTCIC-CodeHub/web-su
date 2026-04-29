@@ -677,28 +677,49 @@
                 await loadScript('https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
 
                 const { jsPDF } = window.jspdf;
-                const element = document.querySelector('.certificate');
+                const originalElement = document.querySelector('.certificate');
                 
-                // 使用 html2canvas 捕获证书元素
-                const canvas = await html2canvas(element, {
-                    scale: 2, // 提高清晰度
+                // 克隆证书元素，避免影响页面显示
+                const clone = originalElement.cloneNode(true);
+                
+                // 设置固定宽度为 700px（与 PC 端最大宽度一致）
+                clone.style.width = '700px';
+                clone.style.maxWidth = '700px';
+                clone.style.position = 'absolute';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                document.body.appendChild(clone);
+
+                // 使用 html2canvas 捕获克隆的元素
+                const canvas = await html2canvas(clone, {
+                    scale: 2,
                     useCORS: true,
                     backgroundColor: '#fff9e6',
-                    logging: false
+                    logging: false,
+                    windowWidth: 700
                 });
+
+                // 移除克隆的元素
+                document.body.removeChild(clone);
 
                 // A4 尺寸 (210mm x 297mm)
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = pdf.internal.pageSize.getHeight();
                 
-                // 计算图片尺寸，保持比例并留边距
-                const imgWidth = pdfWidth - 20; // 左右各留 10mm 边距
+                // 计算图片尺寸，填满页面宽度（留 10mm 边距）
+                const imgWidth = pdfWidth - 20;
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 
-                // 如果图片高度超过页面，按比例缩小
-                const finalHeight = imgHeight > pdfHeight - 20 ? pdfHeight - 20 : imgHeight;
-                const finalWidth = imgHeight > pdfHeight - 20 ? (canvas.width * (pdfHeight - 20)) / canvas.height : imgWidth;
+                // 如果高度超过页面，按页面高度缩放
+                let finalWidth, finalHeight;
+                if (imgHeight > pdfHeight - 20) {
+                    finalHeight = pdfHeight - 20;
+                    finalWidth = (canvas.width * finalHeight) / canvas.height;
+                } else {
+                    finalWidth = imgWidth;
+                    finalHeight = imgHeight;
+                }
 
                 const imgData = canvas.toDataURL('image/png');
                 pdf.addImage(imgData, 'PNG', (pdfWidth - finalWidth) / 2, 10, finalWidth, finalHeight);
